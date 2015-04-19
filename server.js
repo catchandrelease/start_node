@@ -5,20 +5,22 @@ function start(route, handle) {
 
 	function onRequest(request, response) {
 		var pathname = url.parse(request.url).pathname;
-		var postData = "";
+		//var postData = "";
 	    console.log("Request for " + pathname + " received.");
 
-	    request.setEncoding("utf8");
+	    route(handle, pathname, response, request)
 
-	    request.addListener("data", function(postDataChunk) {
-	    	postData += postDataChunk;
-	    	console.log("received POST data chunk '" + 
-	    	postDataChunk + ".");
-	    });
+	    // request.setEncoding("utf8");
 
-	    request.addListener("end", function() {
-	    	route(handle, pathname, response, postData);
-	    });
+	    // request.addListener("data", function(postDataChunk) {
+	    // 	postData += postDataChunk;
+	    // 	console.log("received POST data chunk '" + 
+	    // 	postDataChunk + ".");
+	    // });
+
+	    // request.addListener("end", function() {
+	    // 	route(handle, pathname, response, postData);
+	    // });
 
 	    //route(handle, pathname, response);
 	 //    response.writeHead(200, {"Content-Type": "text/plain"});
